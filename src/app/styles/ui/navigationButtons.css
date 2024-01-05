@@ -1,0 +1,10 @@
+.navigation-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .navigation-button {
+      color: white;
+      background-color: cornflowerblue;
+  }
+  
