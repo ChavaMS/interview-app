@@ -1,10 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import { onShowAddInterviewerModal, onShowAddCandidateModal } from "../index";
+import {
+  onShowAddInterviewerModal,
+  onShowAddCandidateModal,
+  onSetVisibilityBackButton,
+} from "../index";
 
 export const useUiStore = () => {
-  const { showAddCandidateModal, showAddInterviewerModal } = useSelector(
-    (state) => state.ui
-  );
+  const { showAddCandidateModal, showAddInterviewerModal, backButton } =
+    useSelector((state) => state.ui);
   const dispatch = useDispatch();
 
   const openInterviewersModal = () => {
@@ -23,13 +26,24 @@ export const useUiStore = () => {
     dispatch(onShowAddCandidateModal(false));
   };
 
+  const showBackButton = () => {
+    dispatch(onSetVisibilityBackButton(true));
+  };
+
+  const hideBackButton = () => {
+    dispatch(onSetVisibilityBackButton(false));
+  };
+
   return {
     showAddCandidateModal,
     showAddInterviewerModal,
+    backButton,
 
     openInterviewersModal,
     closeInterviewersModal,
     openCandiateModal,
     closeCandidateModal,
+    showBackButton,
+    hideBackButton,
   };
 };

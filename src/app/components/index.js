@@ -1,6 +1,7 @@
 // DASHBOARD
 export * from "./dashboard/EmptyDashboard";
 export * from './dashboard/InterviewersList';
+export * from './dashboard/CandidatesTable';
 
 // MODALS
 export * from './modals/AddInterviewerModal';
