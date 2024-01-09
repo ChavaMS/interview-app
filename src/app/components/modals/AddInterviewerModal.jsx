@@ -1,6 +1,8 @@
 import Modal from "react-modal";
 import "../../styles/modals/modal.css";
 import { useUiStore } from "../../../store";
+import { useForm } from "../../../hooks";
+import { useContentStore } from "../../../store/hooks/useContentStore";
 
 const customStyles = {
   content: {
@@ -15,8 +17,17 @@ const customStyles = {
 
 Modal.setAppElement("#root");
 
+const initialState = {
+  name: "",
+  id: 0,
+  eid: "",
+};
+
 export const AddInterviewerModal = () => {
   const { showAddInterviewerModal, closeInterviewersModal } = useUiStore();
+  const { addNewInterviewer, getLastInterviewerId } = useContentStore();
+
+  const { name, eid, onInputChange, formState, onResetForm } = useForm(initialState);
 
   const onCloseModal = () => {
     closeInterviewersModal();
@@ -24,7 +35,9 @@ export const AddInterviewerModal = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log("submit form");
+    addNewInterviewer({...formState, id: getLastInterviewerId()});
+    onResetForm();
+    onCloseModal();
   };
 
   return (
@@ -45,6 +58,9 @@ export const AddInterviewerModal = () => {
         <div className="form-group mb-2">
           <label className="form-label">Nombre completo</label>
           <input
+            value={name}
+            name="name"
+            onChange={onInputChange}
             type="text"
             className="form-control"
             placeholder="Ingrese el nombre"
@@ -54,6 +70,10 @@ export const AddInterviewerModal = () => {
         <div className="form-group mb-2">
           <label>Id del Empleado</label>
           <input
+            disabled={true}
+            value={getLastInterviewerId()}
+            name="id"
+            onChange={onInputChange}
             type="text"
             className="form-control"
             placeholder="Id del empleado"
@@ -63,9 +83,12 @@ export const AddInterviewerModal = () => {
         <div className="form-group mb-2">
           <label className="form-label">EID</label>
           <input
+            value={eid}
+            name="eid"
+            onChange={onInputChange}
             type="text"
             className="form-control"
-            placeholder="Id del empleado"
+            placeholder="EID del empleado"
           />
         </div>
 

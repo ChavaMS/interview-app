@@ -1,23 +1,41 @@
+import { useEffect } from "react";
 import { useUiStore } from "../../../store";
+import { useContentStore } from "../../../store/hooks/useContentStore";
+import { InterviewerCard } from "./InterviewerCard";
 
 export const InterviewersList = () => {
-  const { openInterviewersModal } = useUiStore();
+  const {
+    openInterviewersModal,
+    enableContinueButton,
+    disableContinueButton,
+    hideBackButton,
+  } = useUiStore();
+  const { interviewers, activeInterviewer } = useContentStore();
+
+  useEffect(() => {
+    hideBackButton();
+  });
+
+  useEffect(() => {
+    if (activeInterviewer) {
+      enableContinueButton();
+    } else {
+      disableContinueButton();
+    }
+  }, [activeInterviewer]);
 
   const addInterviewer = () => {
-    console.log('flag');
     openInterviewersModal();
   };
 
   return (
     <div className="interviewrs-list-container row row-cols-1 row-cols-md-5 g-4 my-4">
-      <div className="text-center card border-0">
-        <i className="fa-solid fa-user add-user-icon"></i>
-        <h5 className="d-block mt-2">Salvador Medina</h5>
-        <span className="d-block">#1234</span>
-        <span className="d-block">salvador.medina</span>
-      </div>
+      {interviewers.map((interviewer) => (
+        <InterviewerCard key={interviewer.id} {...interviewer} />
+      ))}
+
       <div
-        className="text-center card border-0"
+        className="text-center card border-0 p-2"
         role="button"
         onClick={addInterviewer}
       >

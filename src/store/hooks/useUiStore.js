@@ -3,11 +3,16 @@ import {
   onShowAddInterviewerModal,
   onShowAddCandidateModal,
   onSetVisibilityBackButton,
+  onEnableContinueButton,
 } from "../index";
 
 export const useUiStore = () => {
-  const { showAddCandidateModal, showAddInterviewerModal, backButton } =
-    useSelector((state) => state.ui);
+  const {
+    showAddCandidateModal,
+    showAddInterviewerModal,
+    backButton,
+    continueButton,
+  } = useSelector((state) => state.ui);
   const dispatch = useDispatch();
 
   const openInterviewersModal = () => {
@@ -34,10 +39,19 @@ export const useUiStore = () => {
     dispatch(onSetVisibilityBackButton(false));
   };
 
+  const enableContinueButton = () => {
+    dispatch(onEnableContinueButton(true));
+  };
+
+  const disableContinueButton = () => {
+    dispatch(onEnableContinueButton(false));
+  };
+
   return {
     showAddCandidateModal,
     showAddInterviewerModal,
     backButton,
+    continueButton,
 
     openInterviewersModal,
     closeInterviewersModal,
@@ -45,5 +59,7 @@ export const useUiStore = () => {
     closeCandidateModal,
     showBackButton,
     hideBackButton,
+    enableContinueButton,
+    disableContinueButton,
   };
 };

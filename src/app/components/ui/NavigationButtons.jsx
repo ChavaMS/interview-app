@@ -1,12 +1,11 @@
 import { useNavigate } from "react-router-dom";
+import { useUiStore } from "../../../store";
 import "../../styles/ui/navigationButtons.css";
-import { useSelector } from "react-redux";
 
 export const NavigationButtons = () => {
   const navigate = useNavigate();
 
-  //const { backButton } = useUiStore();
-  const { backButton } = useSelector((state) => state.ui);
+  const { backButton, continueButton } = useUiStore();
 
   const nextRoute = () => {
     navigate("/candidates");
@@ -25,7 +24,7 @@ export const NavigationButtons = () => {
       >
         Regresar
       </button>
-      <button className={"btn navigation-button " + (backButton.visible ? "" : "ms-auto")} onClick={nextRoute}>
+      <button disabled={!continueButton.enable} className={"btn navigation-button " + (backButton.visible ? "" : "ms-auto")} onClick={nextRoute}>
         <span className="mx-3">Continuar</span>
         <i className="fa-solid fa-arrow-right"></i>
       </button>

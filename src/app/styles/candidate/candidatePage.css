@@ -1,0 +1,9 @@
+.candidate-information {
+  min-height: 400px;
+  width: 100%;
+  padding: 50px;
+}
+
+.candidate-information-title {
+    color: lightgray;
+}

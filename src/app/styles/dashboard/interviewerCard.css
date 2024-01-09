@@ -1,0 +1,14 @@
+.interviewer-card:hover {
+  border: 1px solid black;
+}
+
+.interviewer-card {
+  margin-right: 5px;
+  margin-left: 5px;
+  padding: 10px;
+  border: 0px;
+}
+
+.interviewer-card-selected {
+  border: 1px solid black;
+}

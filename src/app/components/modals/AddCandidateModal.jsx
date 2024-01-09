@@ -1,6 +1,8 @@
 import Modal from "react-modal";
 import "../../styles/modals/modal.css";
 import { useUiStore } from "../../../store";
+import { useForm } from "../../../hooks";
+import { useContentStore } from "../../../store/hooks/useContentStore";
 
 const customStyles = {
   content: {
@@ -15,8 +17,18 @@ const customStyles = {
 
 Modal.setAppElement("#root");
 
+const initialState = {
+  id: 0,
+  interviewer: null,
+  name: "",
+  email: "",
+  type: 0,
+};
+
 export const AddCandidateModal = () => {
   const { showAddCandidateModal, closeCandidateModal } = useUiStore();
+  const { addNewCandidate } = useContentStore();
+  const { name, email, type, formState, onInputChange, onResetForm } = useForm(initialState);
 
   const onCloseModal = () => {
     closeCandidateModal();
@@ -24,7 +36,9 @@ export const AddCandidateModal = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log("submit form");
+    addNewCandidate(formState);
+    onResetForm();
+    onCloseModal();
   };
 
   return (
@@ -45,6 +59,9 @@ export const AddCandidateModal = () => {
         <div className="form-group mb-2">
           <label className="form-label">Nombre completo</label>
           <input
+            value={name}
+            name="name"
+            onChange={onInputChange}
             type="text"
             className="form-control"
             placeholder="Ingrese el nombre"
@@ -54,15 +71,23 @@ export const AddCandidateModal = () => {
         <div className="form-group mb-2">
           <label>Correo electronico</label>
           <input
+            value={email}
+            name="email"
+            onChange={onInputChange}
             type="email"
             className="form-control"
-            placeholder="Id del empleado"
+            placeholder="Correo"
           />
         </div>
 
         <div className="form-group mb-2">
           <label className="form-label">Tipo</label>
-          <select className="form-select" defaultValue={"0"}>
+          <select
+            value={type}
+            name="type"
+            onChange={onInputChange}
+            className="form-select"
+          >
             <option value="0">Seleccione el tipo</option>
             <option value="1">Interno</option>
             <option value="2">Externo</option>

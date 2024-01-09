@@ -10,17 +10,32 @@ export const contentSlice = createSlice({
   },
   reducers: {
     onSetActiveInterviewer: (state, { payload }) => {
-      state.activeInterviewer = payload;
+      if (payload !== null) {
+        state.activeInterviewer = state.interviewers.find(
+          (interviewer) => interviewer.id === payload
+        );
+      } else {
+        state.activeInterviewer = null;
+      }
     },
     onSetActiveCandidate: (state, { payload }) => {
-      state.activeCandidate = payload;
+      if (payload !== null) {
+        state.activeCandidate = state.candidates.find(
+          (candidate) => candidate.id === payload
+        );
+      } else {
+        state.activeCandidate = null;
+      }
     },
     onAddNewInterviewer: (state, { payload }) => {
       state.interviewers.push(payload);
       state.activeInterviewer = null;
     },
     onAddNewCandidate: (state, { payload }) => {
-      state.candidates.push(payload);
+      state.candidates.push({
+        ...payload,
+        interviewer: state.activeInterviewer.id,
+      });
       state.activeCandidate = null;
     },
   },
