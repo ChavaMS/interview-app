@@ -1,11 +1,12 @@
-// DASHBOARD
-export * from "./dashboard/EmptyDashboard";
-export * from './dashboard/InterviewersList';
-export * from './dashboard/InterviewerCard';
-export * from './dashboard/CandidatesTable';
+// INTERVIEWER
+export * from './Interviewer/InterviewersList';
+export * from './Interviewer/InterviewerCard';
 
 // CANDIDATE
-export * from './candidate/CandidateInformation';
+export * from './candidate/CandidatesTable';
+
+// SHARED
+export * from "./shared/EmptyDashboard";
 
 // MODALS
 export * from './modals/AddInterviewerModal';

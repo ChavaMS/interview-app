@@ -1,1 +1,2 @@
-export * from './AppRoutes';
+export * from './InterviewerRoutes';
+export * from './CandidateRoutes';

@@ -8,7 +8,7 @@ export const CandidatesTable = () => {
 
   const openCandidateInfo = (candidateId) => {
     setActiveCandidate(candidateId);
-    navigate("/candidate");
+    navigate("/candidates/information");
   };
 
   const getCandidateType = (candidateType) => {

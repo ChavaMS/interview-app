@@ -1,7 +1,7 @@
-import { Navbar, NavigationButtons } from "../components";
 import { Outlet } from "react-router-dom";
+import { Navbar, NavigationButtons } from "../components";
 
-export const AppLayout = () => {
+export const CandidateRouter = () => {
   return (
     <>
       <Navbar />
