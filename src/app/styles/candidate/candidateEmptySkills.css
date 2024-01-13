@@ -1,0 +1,9 @@
+.skills-icon {
+  font-size: 80px;
+  color: #9c33c1;
+}
+
+.empty-skills-container {
+  height: 100%;
+  cursor: pointer;
+}

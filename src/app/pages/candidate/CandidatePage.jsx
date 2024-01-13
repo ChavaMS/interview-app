@@ -1,32 +1,36 @@
+import { useEffect } from "react";
+import { useContentStore } from "../../../store/hooks/useContentStore";
+import {
+  CandidateSkills,
+  CandidateInformation,
+  CandidateEmptySkills,
+  AddSkillsModal,
+} from "../../components";
 import "../../styles/candidate/candidatePage.css";
 
 export const CandidatePage = () => {
+  const { activeCandidate, loadSkills, getCandidateSkills } = useContentStore();
+
+  console.log("flag");
+  useEffect(() => {
+    loadSkills();
+  }, []);
+
   return (
     <div className="container-fluid">
       <div className="row p-5">
         <div className="col-md-6">
-          <div className="shadow candidate-information">
-            <div className="d-flex">
-              <i className="fa-solid fa-user add-user-icon me-5"></i>
-              <div>
-                <h3 className="candidate-information-title">Nombre completo</h3>
-                <h3>Salvador</h3>
-              </div>
-            </div>
-            <div className="mt-4">
-              <h3 className="candidate-information-title">Correo electrónico</h3>
-              <h3>salvador.medina@gmail.com</h3>
-            </div>
-            <div className="mt-4">
-              <h3 className="candidate-information-title">Tipo</h3>
-              <h3>Interno</h3>
-            </div>
-          </div>
+          <CandidateInformation candidate={activeCandidate} />
         </div>
         <div className="col-md-6">
-          <div className="shadow candidate-information"></div>
+          {getCandidateSkills().length > 0 ? (
+            <CandidateSkills skills={getCandidateSkills()} />
+          ) : (
+            <CandidateEmptySkills />
+          )}
         </div>
       </div>
+      <AddSkillsModal/>
     </div>
   );
 };

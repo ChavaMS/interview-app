@@ -1,14 +1,10 @@
-import { Navbar, NavigationButtons } from "../components";
 import { Outlet } from "react-router-dom";
+import { RouterLayout } from "../components/layout";
 
 export const InterviewerRouter = () => {
   return (
-    <>
-      <Navbar />
-
+    <RouterLayout>
       <Outlet />
-
-      <NavigationButtons />
-    </>
+    </RouterLayout>
   );
 };

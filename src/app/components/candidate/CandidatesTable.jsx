@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useContentStore } from "../../../store/hooks/useContentStore";
-import { CandidateType } from "../../enums";
+import { getCandidateType } from "../../helpers";
 
 export const CandidatesTable = () => {
   const { candidates, setActiveCandidate } = useContentStore();
@@ -9,10 +9,6 @@ export const CandidatesTable = () => {
   const openCandidateInfo = (candidateId) => {
     setActiveCandidate(candidateId);
     navigate("/candidates/information");
-  };
-
-  const getCandidateType = (candidateType) => {
-    return CandidateType[candidateType];
   };
 
   return (
@@ -34,7 +30,10 @@ export const CandidatesTable = () => {
             <td>{candidate.email}</td>
             <td>{getCandidateType(candidate.type)}</td>
             <td>
-              <button className="btn btn-primary" onClick={() => openCandidateInfo(candidate.id)}>
+              <button
+                className="btn btn-primary"
+                onClick={() => openCandidateInfo(candidate.id)}
+              >
                 Ver mas Información
               </button>
             </td>

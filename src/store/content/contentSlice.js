@@ -6,7 +6,14 @@ export const contentSlice = createSlice({
     interviewers: [],
     activeInterviewer: null,
     candidates: [],
-    activeCandidate: null,
+    activeCandidate: {
+      id: "",
+      name: "",
+      type: "",
+      email: "",
+    },
+    candidatesSkills: [],
+    skills: [],
   },
   reducers: {
     onSetActiveInterviewer: (state, { payload }) => {
@@ -38,6 +45,16 @@ export const contentSlice = createSlice({
       });
       state.activeCandidate = null;
     },
+    onLoadSkills: (state, { payload }) => {
+      state.skills = payload;
+    },
+    onAddCandidateSkills: (state, { payload }) => {
+      state.candidatesSkills = state.candidatesSkills.filter(
+        (candidateSkills) =>
+          candidateSkills.candidateId !== state.activeCandidate.id
+      );
+      state.candidatesSkills.push(payload);
+    },
   },
 });
 
@@ -46,4 +63,6 @@ export const {
   onSetActiveCandidate,
   onAddNewCandidate,
   onAddNewInterviewer,
+  onLoadSkills,
+  onAddCandidateSkills,
 } = contentSlice.actions;

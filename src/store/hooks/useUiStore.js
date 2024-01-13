@@ -4,12 +4,14 @@ import {
   onShowAddCandidateModal,
   onSetVisibilityBackButton,
   onEnableContinueButton,
+  onShowAddSkillsModal,
 } from "../index";
 
 export const useUiStore = () => {
   const {
     showAddCandidateModal,
     showAddInterviewerModal,
+    showAddSkillsModal,
     backButton,
     continueButton,
   } = useSelector((state) => state.ui);
@@ -31,6 +33,14 @@ export const useUiStore = () => {
     dispatch(onShowAddCandidateModal(false));
   };
 
+  const openSkillsModal = () => {
+    dispatch(onShowAddSkillsModal(true));
+  };
+
+  const closeSkillsModal = () => {
+    dispatch(onShowAddSkillsModal(false));
+  };
+
   const showBackButton = () => {
     dispatch(onSetVisibilityBackButton(true));
   };
@@ -50,6 +60,7 @@ export const useUiStore = () => {
   return {
     showAddCandidateModal,
     showAddInterviewerModal,
+    showAddSkillsModal,
     backButton,
     continueButton,
 
@@ -57,6 +68,8 @@ export const useUiStore = () => {
     closeInterviewersModal,
     openCandiateModal,
     closeCandidateModal,
+    openSkillsModal,
+    closeSkillsModal,
     showBackButton,
     hideBackButton,
     enableContinueButton,

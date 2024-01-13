@@ -1,14 +1,10 @@
 import { Outlet } from "react-router-dom";
-import { Navbar, NavigationButtons } from "../components";
+import { RouterLayout } from "../components/layout";
 
 export const CandidateRouter = () => {
   return (
-    <>
-      <Navbar />
-
+    <RouterLayout>
       <Outlet />
-
-      <NavigationButtons />
-    </>
+    </RouterLayout>
   );
 };
