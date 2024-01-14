@@ -11,9 +11,11 @@ export const uiSlice = createSlice({
       enable: false,
       visible: false,
     },
+    nextRoute: "",
     showAddCandidateModal: false,
     showAddInterviewerModal: false,
     showAddSkillsModal: false,
+    showQuestionsInfoModal: false,
   },
   reducers: {
     onEnableContinueButton: (state, { payload }) => {
@@ -34,6 +36,12 @@ export const uiSlice = createSlice({
     onShowAddSkillsModal: (state, { payload }) => {
       state.showAddSkillsModal = payload;
     },
+    onShowQuestionsInformationModal: (state, { payload }) => {
+      state.showQuestionsInfoModal = payload;
+    },
+    onUpdateNextRoute: (state, { payload }) => {
+      state.nextRoute = payload;
+    },
   },
 });
 
@@ -43,5 +51,7 @@ export const {
   onSetVisibilityBackButton,
   onShowAddCandidateModal,
   onShowAddInterviewerModal,
-  onShowAddSkillsModal
+  onShowAddSkillsModal,
+  onShowQuestionsInformationModal,
+  onUpdateNextRoute,
 } = uiSlice.actions;

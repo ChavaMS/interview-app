@@ -1,23 +1,25 @@
 import { useState } from "react";
 import "../../styles/interview/questionPage.css";
+import { useContentStore } from "../../../store/hooks/useContentStore";
+import { useNavigate } from "react-router-dom";
 
 const initialState = [
   {
     skill: "Javascript",
     question: "Pregunta 1",
-    isCorrect: null,
+    isCorrect: false,
     comments: "",
   },
   {
     skill: "Github",
     question: "Pregunta 2",
-    isCorrect: null,
+    isCorrect: false,
     comments: "",
   },
   {
     skill: "React",
     question: "Pregunta 3",
-    isCorrect: null,
+    isCorrect: false,
     comments: "",
   },
 ];
@@ -25,24 +27,37 @@ const initialState = [
 export const QuestionsPage = () => {
   const [form, setForm] = useState(initialState);
   const [index, setIndex] = useState(0);
-  const formToShow = initialState;
+  const { addInterview } = useContentStore();
+  const navigate = useNavigate();
 
   const nextQuestion = () => {
+    if (index === form.length - 1) {
+      setIndex(0);
+      return;
+    }
     setIndex(() => index + 1);
   };
 
   const prevQuestion = () => {
+    if (index === 0) return;
     setIndex(() => index - 1);
   };
 
   const onAnswerChanged = (answer) => {
-    const newForm = (form[index].isCorrect = answer);
-    setForm(newForm);
+    const newFormState = [...form];
+    newFormState[index].isCorrect = answer;
+    setForm(newFormState);
   };
 
-  const onCommentChanged = (comment) => {
-    const newForm = (form[index].comments = comment);
-    setForm(newForm);
+  const onCommentChanged = ({ target }) => {
+    const newFormState = [...form];
+    newFormState[index].comments = target.value;
+    setForm(newFormState);
+  };
+
+  const submitForm = () => {
+    addInterview(form);
+    navigate('/candidates/results');
   };
 
   return (
@@ -64,9 +79,8 @@ export const QuestionsPage = () => {
               <input
                 className="form-check-input radio-font"
                 type="radio"
-                name="answer"
+                name="isCorrect"
                 id="inlineRadio1"
-                value={true}
                 checked={form[index]?.isCorrect}
                 onChange={() => onAnswerChanged(true)}
               />
@@ -76,9 +90,8 @@ export const QuestionsPage = () => {
               <input
                 className="form-check-input radio-font"
                 type="radio"
-                name="answer"
+                name="isCorrect"
                 id="inlineRadio2"
-                value={false}
                 checked={!form[index]?.isCorrect}
                 onChange={() => onAnswerChanged(false)}
               />
@@ -87,7 +100,13 @@ export const QuestionsPage = () => {
           </div>
           <div className="mt-3">
             <label>Comentarios</label>
-            <textarea onChange={onCommentChanged} name="comments" value={form[index]?.comments} className="form-control" rows="5"></textarea>
+            <textarea
+              onChange={onCommentChanged}
+              name="comments"
+              value={form[index]?.comments}
+              className="form-control"
+              rows="5"
+            ></textarea>
           </div>
         </div>
         <div className="col-md-2 center-content">
@@ -97,7 +116,14 @@ export const QuestionsPage = () => {
         </div>
       </div>
       <div className="text-center mt-3">
-        <span className="question-count-font">1/5</span>
+        <span className="question-count-font">
+          {index + 1}/{form.length}
+        </span>
+      </div>
+      <div className="d-flex justify-content-end mt-5">
+        <button className="btn btn-danger" onClick={submitForm}>
+          Finalizar
+        </button>
       </div>
     </div>
   );

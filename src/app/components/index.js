@@ -15,6 +15,7 @@ export * from "./shared/EmptyDashboard";
 export * from "./modals/AddInterviewerModal";
 export * from "./modals/AddCandidateModal";
 export * from "./modals/AddSkillsModal";
+export * from './modals/QuestionsInformationModal';
 
 // UI
 export * from "./ui/Navbar";

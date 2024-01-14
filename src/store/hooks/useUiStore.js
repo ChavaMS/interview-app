@@ -5,6 +5,8 @@ import {
   onSetVisibilityBackButton,
   onEnableContinueButton,
   onShowAddSkillsModal,
+  onShowQuestionsInformationModal,
+  onUpdateNextRoute,
 } from "../index";
 
 export const useUiStore = () => {
@@ -12,8 +14,10 @@ export const useUiStore = () => {
     showAddCandidateModal,
     showAddInterviewerModal,
     showAddSkillsModal,
+    showQuestionsInfoModal,
     backButton,
     continueButton,
+    nextRoute,
   } = useSelector((state) => state.ui);
   const dispatch = useDispatch();
 
@@ -41,6 +45,14 @@ export const useUiStore = () => {
     dispatch(onShowAddSkillsModal(false));
   };
 
+  const openQuestionsInformationModal = () => {
+    dispatch(onShowQuestionsInformationModal(true));
+  };
+
+  const closeQuestionsInformationModal = () => {
+    dispatch(onShowQuestionsInformationModal(false));
+  };
+
   const showBackButton = () => {
     dispatch(onSetVisibilityBackButton(true));
   };
@@ -57,12 +69,18 @@ export const useUiStore = () => {
     dispatch(onEnableContinueButton(false));
   };
 
+  const updateNextRoute = (nextRoute) => {
+    dispatch(onUpdateNextRoute(nextRoute));
+  };
+
   return {
     showAddCandidateModal,
     showAddInterviewerModal,
     showAddSkillsModal,
+    showQuestionsInfoModal,
     backButton,
     continueButton,
+    nextRoute,
 
     openInterviewersModal,
     closeInterviewersModal,
@@ -74,5 +92,8 @@ export const useUiStore = () => {
     hideBackButton,
     enableContinueButton,
     disableContinueButton,
+    openQuestionsInformationModal,
+    closeQuestionsInformationModal,
+    updateNextRoute
   };
 };

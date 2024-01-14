@@ -14,6 +14,7 @@ export const contentSlice = createSlice({
     },
     candidatesSkills: [],
     skills: [],
+    interviews: [],
   },
   reducers: {
     onSetActiveInterviewer: (state, { payload }) => {
@@ -55,6 +56,12 @@ export const contentSlice = createSlice({
       );
       state.candidatesSkills.push(payload);
     },
+    onAddNewInterview: (state, { payload }) => {
+      state.interviews.push({
+        interview: payload,
+        candidate: state.activeCandidate.id,
+      });
+    },
   },
 });
 
@@ -65,4 +72,5 @@ export const {
   onAddNewInterviewer,
   onLoadSkills,
   onAddCandidateSkills,
+  onAddNewInterview
 } = contentSlice.actions;

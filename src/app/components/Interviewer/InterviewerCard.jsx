@@ -5,12 +5,13 @@ import "../../styles/dashboard/interviewerCard.css";
 export const InterviewerCard = ({ name, id, eid }) => {
   const { activeInterviewer, setActiveInterviewer, removeActiveInterviewer } =
     useContentStore();
-  const { enableContinueButton } = useUiStore();
+  const { enableContinueButton, updateNextRoute } = useUiStore();
 
   const selectCard = () => {
     if (activeInterviewer && activeInterviewer.id === id) {
       removeActiveInterviewer();
     } else {
+      updateNextRoute("/candidates");
       setActiveInterviewer(id);
       enableContinueButton();
     }

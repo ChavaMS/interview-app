@@ -1,0 +1,7 @@
+.row-selected {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.table-row-pointer {
+  cursor: pointer;
+}

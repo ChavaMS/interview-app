@@ -9,6 +9,7 @@ export const EmptyDashboard = ({ section }) => {
     openCandiateModal,
     hideBackButton,
     showBackButton,
+    disableContinueButton,
   } = useUiStore();
 
   useEffect(() => {
@@ -17,6 +18,8 @@ export const EmptyDashboard = ({ section }) => {
     } else {
       showBackButton();
     }
+
+    disableContinueButton();
 
   }, [section]);
 

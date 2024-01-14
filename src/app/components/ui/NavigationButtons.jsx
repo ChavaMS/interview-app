@@ -5,10 +5,10 @@ import "../../styles/ui/navigationButtons.css";
 export const NavigationButtons = () => {
   const navigate = useNavigate();
 
-  const { backButton, continueButton } = useUiStore();
+  const { backButton, continueButton, nextRoute: route } = useUiStore();
 
   const nextRoute = () => {
-    navigate("/candidates");
+    navigate(route);
   };
 
   const previousRoute = () => {
@@ -24,7 +24,13 @@ export const NavigationButtons = () => {
       >
         Regresar
       </button>
-      <button disabled={!continueButton.enable} className={"btn navigation-button " + (backButton.visible ? "" : "ms-auto")} onClick={nextRoute}>
+      <button
+        disabled={!continueButton.enable}
+        className={
+          "btn navigation-button " + (backButton.visible ? "" : "ms-auto")
+        }
+        onClick={nextRoute}
+      >
         <span className="mx-3">Continuar</span>
         <i className="fa-solid fa-arrow-right"></i>
       </button>

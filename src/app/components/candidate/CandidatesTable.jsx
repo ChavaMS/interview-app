@@ -1,14 +1,35 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { useContentStore } from "../../../store/hooks/useContentStore";
 import { getCandidateType } from "../../helpers";
+import { useUiStore } from "../../../store";
+import "../../styles/candidate/candidateTable.css";
 
 export const CandidatesTable = () => {
-  const { candidates, setActiveCandidate } = useContentStore();
+  const { candidates, setActiveCandidate, activeCandidate } = useContentStore();
+  const { enableContinueButton, disableContinueButton, updateNextRoute } = useUiStore();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (activeCandidate) {
+      updateNextRoute("/candidates/interview");
+      enableContinueButton();
+    } else {
+      disableContinueButton();
+    }
+  }, [activeCandidate]);
 
   const openCandidateInfo = (candidateId) => {
     setActiveCandidate(candidateId);
     navigate("/candidates/information");
+  };
+
+  const selectCandidate = (candidateId) => {
+    if (candidateId === activeCandidate?.id) {
+      setActiveCandidate(null);
+    } else {
+      setActiveCandidate(candidateId);
+    }
   };
 
   return (
@@ -24,12 +45,46 @@ export const CandidatesTable = () => {
       </thead>
       <tbody>
         {candidates.map((candidate) => (
-          <tr key={candidate.id}>
-            <th>{candidate.id}</th>
-            <td>{candidate.name}</td>
-            <td>{candidate.email}</td>
-            <td>{getCandidateType(candidate.type)}</td>
-            <td>
+          <tr
+            className="table-row-pointer"
+            key={candidate.id}
+          >
+            <th>
+              <input type="checkbox" checked={candidate.id === activeCandidate?.id} onChange={() => selectCandidate(candidate.id)} />
+            </th>
+            <th
+              className={
+                activeCandidate?.id === candidate.id ? "row-selected" : ""
+              }
+            >
+              {candidate.id}
+            </th>
+            <td
+              className={
+                activeCandidate?.id === candidate.id ? "row-selected" : ""
+              }
+            >
+              {candidate.name}
+            </td>
+            <td
+              className={
+                activeCandidate?.id === candidate.id ? "row-selected" : ""
+              }
+            >
+              {candidate.email}
+            </td>
+            <td
+              className={
+                activeCandidate?.id === candidate.id ? "row-selected" : ""
+              }
+            >
+              {getCandidateType(candidate.type)}
+            </td>
+            <td
+              className={
+                activeCandidate?.id === candidate.id ? "row-selected" : ""
+              }
+            >
               <button
                 className="btn btn-primary"
                 onClick={() => openCandidateInfo(candidate.id)}

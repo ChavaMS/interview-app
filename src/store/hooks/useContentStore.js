@@ -6,6 +6,7 @@ import {
   onLoadSkills,
   onSetActiveCandidate,
   onSetActiveInterviewer,
+  onAddNewInterview,
 } from "../content/contentSlice";
 import { skills } from "../../app/data";
 
@@ -17,6 +18,7 @@ export const useContentStore = () => {
     activeCandidate,
     skills: skillsLoaded,
     candidatesSkills,
+    interviews,
   } = useSelector((state) => state.content);
   const dispatch = useDispatch();
 
@@ -73,6 +75,22 @@ export const useContentStore = () => {
     return candidateSkills ? candidateSkills.skills : [];
   };
 
+  // INTERVIEW
+  const addInterview = (interview) => {
+    const hasInterviews = interviews.some(
+      (interview) => interview.candidate.id === activeCandidate.id
+    );
+    if (!hasInterviews) {
+      dispatch(onAddNewInterview(interview));
+    }
+  };
+
+  const getSelectedCandidateInterview = () => {
+    return interviews.find(
+      (interview) => interview.candidate === activeCandidate.id
+    ).interview;
+  };
+
   return {
     interviewers,
     candidates,
@@ -90,5 +108,7 @@ export const useContentStore = () => {
     getCandidateSkills,
     getLastInterviewerId,
     getLastCandidateId,
+    addInterview,
+    getSelectedCandidateInterview,
   };
 };
