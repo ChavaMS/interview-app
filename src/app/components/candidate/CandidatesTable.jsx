@@ -7,12 +7,11 @@ import "../../styles/candidate/candidateTable.css";
 
 export const CandidatesTable = () => {
   const { candidates, setActiveCandidate, activeCandidate } = useContentStore();
-  const { enableContinueButton, disableContinueButton, updateNextRoute } = useUiStore();
+  const { enableContinueButton, disableContinueButton } = useUiStore();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (activeCandidate) {
-      updateNextRoute("/candidates/interview");
       enableContinueButton();
     } else {
       disableContinueButton();

@@ -1,9 +1,10 @@
 import { useUiStore } from "../../../store";
 import { CandidateCardLayout } from "../layout";
 
-export const CandidateSkills = ({ skills }) => {
-  const { openSkillsModal } = useUiStore();
-  
+export const CandidateSkills = ({ skills = [] }) => {
+  const { openSkillsModal } =
+    useUiStore();
+
   const addSkill = () => {
     openSkillsModal();
   };
@@ -17,7 +18,9 @@ export const CandidateSkills = ({ skills }) => {
         ))}
       </ul>
       <div>
-        <button onClick={addSkill} className="btn btn-primary">Add more skills</button>
+        <button onClick={addSkill} className="btn btn-primary">
+          Add more skills
+        </button>
       </div>
     </CandidateCardLayout>
   );

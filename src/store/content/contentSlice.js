@@ -60,7 +60,24 @@ export const contentSlice = createSlice({
       state.interviews.push({
         interview: payload,
         candidate: state.activeCandidate.id,
+        comments: "",
       });
+    },
+    onUpdateInterviewComments: (state, { payload }) => {
+      state.interviews = state.interviews.map((interview) => {
+        if (interview.candidate === state.activeCandidate.id) {
+          return {
+            ...interview,
+            comments: payload,
+          };
+        }
+        return {
+          ...interview,
+        };
+      });
+    },
+    onLoadCandidateQuestions: (state, { payload }) => {
+      state.candidateQuestions = payload;
     },
   },
 });
@@ -72,5 +89,7 @@ export const {
   onAddNewInterviewer,
   onLoadSkills,
   onAddCandidateSkills,
-  onAddNewInterview
+  onAddNewInterview,
+  onLoadCandidateQuestions,
+  onUpdateInterviewComments,
 } = contentSlice.actions;

@@ -8,6 +8,9 @@ export * from "./candidate/CandidateEmptySkills";
 export * from "./candidate/CandidateSkills";
 export * from "./candidate/CandidateInformation";
 
+// INTERVIEW
+export * from './interview/InterviewResults';
+
 // SHARED
 export * from "./shared/EmptyDashboard";
 

@@ -1,34 +1,16 @@
 import { useState } from "react";
-import "../../styles/interview/questionPage.css";
-import { useContentStore } from "../../../store/hooks/useContentStore";
 import { useNavigate } from "react-router-dom";
+import { useContentStore } from "../../../store/hooks/useContentStore";
+import { getSkillName } from "../../helpers";
+import "../../styles/interview/questionPage.css";
 
-const initialState = [
-  {
-    skill: "Javascript",
-    question: "Pregunta 1",
-    isCorrect: false,
-    comments: "",
-  },
-  {
-    skill: "Github",
-    question: "Pregunta 2",
-    isCorrect: false,
-    comments: "",
-  },
-  {
-    skill: "React",
-    question: "Pregunta 3",
-    isCorrect: false,
-    comments: "",
-  },
-];
-
-export const QuestionsPage = () => {
-  const [form, setForm] = useState(initialState);
-  const [index, setIndex] = useState(0);
-  const { addInterview } = useContentStore();
+export const InterviewPage = () => {
+  const { skillsLoaded, addInterview, loadCandidateQuestions } =
+    useContentStore();
   const navigate = useNavigate();
+
+  const [form, setForm] = useState(loadCandidateQuestions());
+  const [index, setIndex] = useState(0);
 
   const nextQuestion = () => {
     if (index === form.length - 1) {
@@ -57,7 +39,7 @@ export const QuestionsPage = () => {
 
   const submitForm = () => {
     addInterview(form);
-    navigate('/candidates/results');
+    navigate("/interview/results");
   };
 
   return (
@@ -71,7 +53,7 @@ export const QuestionsPage = () => {
         </div>
         <div className="col-md-8 text-center">
           <h3 className="d-inline-block w-100 skill-title">
-            {form[index]?.skill}
+            {getSkillName(form[index]?.skillId, skillsLoaded)}
           </h3>
           <h3 className="d-inline-block w-100 mt-3">{form[index]?.question}</h3>
           <div className="mt-3">

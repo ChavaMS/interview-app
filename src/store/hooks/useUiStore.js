@@ -7,6 +7,8 @@ import {
   onShowAddSkillsModal,
   onShowQuestionsInformationModal,
   onUpdateNextRoute,
+  onSetVisibilityContinueButton,
+  onSetTextContinueButton,
 } from "../index";
 
 export const useUiStore = () => {
@@ -21,6 +23,7 @@ export const useUiStore = () => {
   } = useSelector((state) => state.ui);
   const dispatch = useDispatch();
 
+  // MODALS
   const openInterviewersModal = () => {
     dispatch(onShowAddInterviewerModal(true));
   };
@@ -53,6 +56,7 @@ export const useUiStore = () => {
     dispatch(onShowQuestionsInformationModal(false));
   };
 
+  // BUTTONS
   const showBackButton = () => {
     dispatch(onSetVisibilityBackButton(true));
   };
@@ -69,6 +73,19 @@ export const useUiStore = () => {
     dispatch(onEnableContinueButton(false));
   };
 
+  const showContinueButton = () => {
+    dispatch(onSetVisibilityContinueButton(true));
+  };
+
+  const hideContinueButton = () => {
+    dispatch(onSetVisibilityContinueButton(false));
+  };
+
+  const updateContinueButtonText = (text) => {
+    dispatch(onSetTextContinueButton(text));
+  };
+
+  // ROUTES
   const updateNextRoute = (nextRoute) => {
     dispatch(onUpdateNextRoute(nextRoute));
   };
@@ -92,8 +109,11 @@ export const useUiStore = () => {
     hideBackButton,
     enableContinueButton,
     disableContinueButton,
+    showContinueButton,
+    hideContinueButton,
+    updateContinueButtonText,
     openQuestionsInformationModal,
     closeQuestionsInformationModal,
-    updateNextRoute
+    updateNextRoute,
   };
 };

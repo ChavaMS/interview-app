@@ -1,6 +1,7 @@
 import Modal from "react-modal";
 import { useUiStore } from "../../../store";
 import { useContentStore } from "../../../store/hooks/useContentStore";
+import { getSkillName } from "../../helpers";
 
 const customStyles = {
   content: {
@@ -18,7 +19,7 @@ Modal.setAppElement("#root");
 export const QuestionsInformationModal = () => {
   const { showQuestionsInfoModal, closeQuestionsInformationModal } =
     useUiStore();
-  const { getSelectedCandidateInterview } = useContentStore();
+  const { skillsLoaded, getSelectedCandidateInterview } = useContentStore();
 
   const onCloseModal = () => {
     closeQuestionsInformationModal();
@@ -50,9 +51,9 @@ export const QuestionsInformationModal = () => {
         <tbody>
           {getSelectedCandidateInterview().map((interview, index) => (
             <tr key={index}>
-              <td>{interview.skill}</td>
+              <td>{getSkillName(interview.skillId, skillsLoaded)}</td>
               <td>{interview.question}</td>
-              <td>{interview.isCorrect ? 'Correcta' : 'Incorrecta'}</td>
+              <td>{interview.isCorrect ? "Correcta" : "Incorrecta"}</td>
               <td>{interview.comments}</td>
             </tr>
           ))}

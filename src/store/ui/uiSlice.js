@@ -6,6 +6,7 @@ export const uiSlice = createSlice({
     continueButton: {
       enable: false,
       visible: true,
+      text: 'Continuar'
     },
     backButton: {
       enable: false,
@@ -20,6 +21,12 @@ export const uiSlice = createSlice({
   reducers: {
     onEnableContinueButton: (state, { payload }) => {
       state.continueButton.enable = payload;
+    },
+    onSetVisibilityContinueButton: (state, { payload }) => {
+      state.continueButton.visible = payload;
+    },
+    onSetTextContinueButton: (state, { payload }) => {
+      state.continueButton.text = payload;
     },
     onEnableBackButton: (state, { payload }) => {
       state.backButton.enable = payload;
@@ -47,6 +54,8 @@ export const uiSlice = createSlice({
 
 export const {
   onEnableContinueButton,
+  onSetVisibilityContinueButton,
+  onSetTextContinueButton,
   onEnableBackButton,
   onSetVisibilityBackButton,
   onShowAddCandidateModal,

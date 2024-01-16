@@ -1,9 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { InterviewerRoutes, CandidateRoutes } from "../app/routes";
-import {
-  InterviewerRouter,
-  CandidateRouter,
-} from "../app/router";
+import { InterviewerRoutes, CandidateRoutes, InterviewRoutes } from "../app/routes";
+import { InterviewerRouter, CandidateRouter, InterviewRouter } from "../app/router";
 
 const routesConfig = createBrowserRouter([
   {
@@ -15,6 +12,11 @@ const routesConfig = createBrowserRouter([
     path: "/candidates",
     children: CandidateRoutes,
     element: <CandidateRouter />,
+  },
+  {
+    path: "/interview",
+    children: InterviewRoutes,
+    element: <InterviewRouter />,
   },
 ]);
 

@@ -7,14 +7,31 @@ import {
   AddSkillsModal,
 } from "../../components";
 import "../../styles/candidate/candidatePage.css";
+import { useUiStore } from "../../../store";
 
 export const CandidatePage = () => {
-  const { activeCandidate, loadSkills, getCandidateSkills } = useContentStore();
+  const { activeCandidate, candidatesSkills, loadSkills, getCandidateSkills } =
+    useContentStore();
+  const {
+    showContinueButton,
+    updateContinueButtonText,
+    enableContinueButton,
+    disableContinueButton,
+    updateNextRoute,
+  } = useUiStore();
 
-  console.log("flag");
   useEffect(() => {
+    if (getCandidateSkills().length === 0) {
+      disableContinueButton();
+    } else {
+      enableContinueButton();
+    }
+
+    showContinueButton();
+    updateContinueButtonText("Comenzar");
+    updateNextRoute("/interview");
     loadSkills();
-  }, []);
+  }, [candidatesSkills]);
 
   return (
     <div className="container-fluid">
@@ -30,7 +47,7 @@ export const CandidatePage = () => {
           )}
         </div>
       </div>
-      <AddSkillsModal/>
+      <AddSkillsModal />
     </div>
   );
 };
