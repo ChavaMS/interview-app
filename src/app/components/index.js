@@ -10,6 +10,7 @@ export * from "./candidate/CandidateInformation";
 
 // INTERVIEW
 export * from './interview/InterviewResults';
+export * from './interview/InterviewFinalComments';
 
 // SHARED
 export * from "./shared/EmptyDashboard";
