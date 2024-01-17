@@ -1,10 +1,7 @@
+import { useState, useEffect } from "react";
+import { useUiStore,useContentStore } from "../../../store";
 import Modal from "react-modal";
-import { useState } from "react";
-import { useUiStore } from "../../../store";
-import { useForm } from "../../../hooks";
-import { useContentStore } from "../../../store/hooks/useContentStore";
 import "../../styles/modals/modal.css";
-import { useEffect } from "react";
 
 const customStyles = {
   content: {

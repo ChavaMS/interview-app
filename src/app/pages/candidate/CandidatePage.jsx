@@ -18,6 +18,7 @@ export const CandidatePage = () => {
     enableContinueButton,
     disableContinueButton,
     updateNextRoute,
+    updateNavbarTitle,
   } = useUiStore();
 
   useEffect(() => {
@@ -28,6 +29,7 @@ export const CandidatePage = () => {
     }
 
     showContinueButton();
+    updateNavbarTitle("Candidate Information");
     updateContinueButtonText("Comenzar");
     updateNextRoute("/interview");
     loadSkills();

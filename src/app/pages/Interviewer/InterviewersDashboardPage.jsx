@@ -11,11 +11,16 @@ import "../../styles/dashboard/dashboardPage.css";
 
 export const InterviewersDashboardPage = () => {
   const { interviewers } = useContentStore();
-  const { updateContinueButtonText, showContinueButton, updateNextRoute } =
-    useUiStore();
+  const {
+    updateContinueButtonText,
+    showContinueButton,
+    updateNextRoute,
+    updateNavbarTitle,
+  } = useUiStore();
 
   useEffect(() => {
     showContinueButton();
+    updateNavbarTitle("Dashboard");
     updateContinueButtonText("Continuar");
     updateNextRoute("/candidates");
   }, []);

@@ -1,16 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useContentStore } from "../../../store/hooks/useContentStore";
 import { getSkillName } from "../../helpers";
 import "../../styles/interview/questionPage.css";
+import { useUiStore } from "../../../store";
 
 export const InterviewPage = () => {
   const { skillsLoaded, addInterview, loadCandidateQuestions } =
     useContentStore();
+  const { updateNavbarTitle } = useUiStore();
   const navigate = useNavigate();
 
   const [form, setForm] = useState(loadCandidateQuestions());
   const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    updateNavbarTitle("Interview");
+  }, []);
 
   const nextQuestion = () => {
     if (index === form.length - 1) {

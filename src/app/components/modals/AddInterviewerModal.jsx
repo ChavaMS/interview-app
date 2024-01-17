@@ -3,6 +3,7 @@ import "../../styles/modals/modal.css";
 import { useUiStore } from "../../../store";
 import { useForm } from "../../../hooks";
 import { useContentStore } from "../../../store/hooks/useContentStore";
+import { useEffect } from "react";
 
 const customStyles = {
   content: {
@@ -22,12 +23,32 @@ const initialState = {
   id: 0,
   eid: "",
 };
+let id = 0;
 
 export const AddInterviewerModal = () => {
   const { showAddInterviewerModal, closeInterviewersModal } = useUiStore();
-  const { addNewInterviewer, getLastInterviewerId } = useContentStore();
+  const {
+    activeInterviewer,
+    addNewInterviewer,
+    getLastInterviewerId,
+    editInterviewer,
+  } = useContentStore();
 
-  const { name, eid, onInputChange, formState, onResetForm } = useForm(initialState);
+  const { name, eid, onInputChange, formState, onResetForm, onEditFormState } =
+    useForm(initialState);
+
+  useEffect(() => {
+    if (showAddInterviewerModal.edit) {
+      onEditFormState({
+        ...activeInterviewer,
+      });
+
+      id = activeInterviewer.id;
+    } else {
+      onResetForm();
+      id = getLastInterviewerId();
+    }
+  }, [showAddInterviewerModal]);
 
   const onCloseModal = () => {
     closeInterviewersModal();
@@ -35,14 +56,18 @@ export const AddInterviewerModal = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    addNewInterviewer({...formState, id: getLastInterviewerId()});
+    if (showAddInterviewerModal.edit) {
+      editInterviewer({ ...formState });
+    } else {
+      addNewInterviewer({ ...formState, id: getLastInterviewerId() });
+    }
     onResetForm();
     onCloseModal();
   };
 
   return (
     <Modal
-      isOpen={showAddInterviewerModal}
+      isOpen={showAddInterviewerModal.open}
       onRequestClose={onCloseModal}
       style={customStyles}
       className="modal"
@@ -71,7 +96,7 @@ export const AddInterviewerModal = () => {
           <label>Id del Empleado</label>
           <input
             disabled={true}
-            value={getLastInterviewerId()}
+            value={id}
             name="id"
             onChange={onInputChange}
             type="text"

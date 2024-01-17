@@ -9,6 +9,8 @@ import {
   onUpdateNextRoute,
   onSetVisibilityContinueButton,
   onSetTextContinueButton,
+  onUpdateNavbarTitle,
+  onShowAddDeleteModal,
 } from "../index";
 
 export const useUiStore = () => {
@@ -17,19 +19,25 @@ export const useUiStore = () => {
     showAddInterviewerModal,
     showAddSkillsModal,
     showQuestionsInfoModal,
+    showDeleteConfirmationModal,
     backButton,
     continueButton,
     nextRoute,
+    navbarTitle,
   } = useSelector((state) => state.ui);
   const dispatch = useDispatch();
 
   // MODALS
   const openInterviewersModal = () => {
-    dispatch(onShowAddInterviewerModal(true));
+    dispatch(onShowAddInterviewerModal({ open: true, edit: false }));
+  };
+
+  const openEditInterviewersModal = () => {
+    dispatch(onShowAddInterviewerModal({ open: true, edit: true }));
   };
 
   const closeInterviewersModal = () => {
-    dispatch(onShowAddInterviewerModal(false));
+    dispatch(onShowAddInterviewerModal({ open: false, edit: false }));
   };
 
   const openCandiateModal = () => {
@@ -38,6 +46,14 @@ export const useUiStore = () => {
 
   const closeCandidateModal = () => {
     dispatch(onShowAddCandidateModal(false));
+  };
+
+  const openDeleteConfirmationModal = () => {
+    dispatch(onShowAddDeleteModal(true));
+  };
+
+  const closeDeleteConfirmationModal = () => {
+    dispatch(onShowAddDeleteModal(false));
   };
 
   const openSkillsModal = () => {
@@ -90,16 +106,24 @@ export const useUiStore = () => {
     dispatch(onUpdateNextRoute(nextRoute));
   };
 
+  // LAYOUT
+  const updateNavbarTitle = (title) => {
+    dispatch(onUpdateNavbarTitle(title));
+  };
+
   return {
     showAddCandidateModal,
     showAddInterviewerModal,
     showAddSkillsModal,
     showQuestionsInfoModal,
+    showDeleteConfirmationModal,
     backButton,
     continueButton,
     nextRoute,
+    navbarTitle,
 
     openInterviewersModal,
+    openEditInterviewersModal,
     closeInterviewersModal,
     openCandiateModal,
     closeCandidateModal,
@@ -114,6 +138,9 @@ export const useUiStore = () => {
     updateContinueButtonText,
     openQuestionsInformationModal,
     closeQuestionsInformationModal,
+    openDeleteConfirmationModal,
+    closeDeleteConfirmationModal,
     updateNextRoute,
+    updateNavbarTitle,
   };
 };

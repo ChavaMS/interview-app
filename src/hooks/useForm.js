@@ -11,6 +11,10 @@ export const useForm = (initialForm = {}) => {
     });
   };
 
+  const onEditFormState = (newFormState) => {
+    setFormState(newFormState);
+  };
+
   const onResetForm = () => {
     setFormState(initialForm);
   };
@@ -20,5 +24,6 @@ export const useForm = (initialForm = {}) => {
     formState,
     onInputChange,
     onResetForm,
+    onEditFormState,
   };
 };

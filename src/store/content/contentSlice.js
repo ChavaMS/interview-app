@@ -39,6 +39,23 @@ export const contentSlice = createSlice({
       state.interviewers.push(payload);
       state.activeInterviewer = null;
     },
+    onEditInterviewer: (state, { payload }) => {
+      state.interviewers = state.interviewers.map((interviewer) => {
+        if (interviewer.id === state.activeInterviewer.id) {
+          return {
+            ...payload,
+          };
+        } else {
+          return { ...interviewer };
+        }
+      });
+    },
+    onDeleteActiveInterviewer: (state) => {
+      state.interviewers = state.interviewers.filter(
+        (interviewer) => interviewer.id !== state.activeInterviewer.id
+      );
+      state.activeInterviewer = null;
+    },
     onAddNewCandidate: (state, { payload }) => {
       state.candidates.push({
         ...payload,
@@ -87,6 +104,8 @@ export const {
   onSetActiveCandidate,
   onAddNewCandidate,
   onAddNewInterviewer,
+  onEditInterviewer,
+  onDeleteActiveInterviewer,
   onLoadSkills,
   onAddCandidateSkills,
   onAddNewInterview,

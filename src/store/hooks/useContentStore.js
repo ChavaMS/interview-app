@@ -8,6 +8,8 @@ import {
   onSetActiveInterviewer,
   onAddNewInterview,
   onUpdateInterviewComments,
+  onEditInterviewer,
+  onDeleteActiveInterviewer,
 } from "../content/contentSlice";
 import { skills, questions } from "../../app/data";
 
@@ -28,12 +30,20 @@ export const useContentStore = () => {
     dispatch(onAddNewInterviewer(interviewer));
   };
 
+  const editInterviewer = (interviewer) => {
+    dispatch(onEditInterviewer(interviewer));
+  };
+
   const setActiveInterviewer = (id) => {
     dispatch(onSetActiveInterviewer(id));
   };
 
   const removeActiveInterviewer = () => {
     dispatch(onSetActiveInterviewer(null));
+  };
+
+  const deleteActiveInterviewer = () => {
+    dispatch(onDeleteActiveInterviewer());
   };
 
   const getLastInterviewerId = () => {
@@ -142,22 +152,31 @@ export const useContentStore = () => {
   };
 
   return {
+    // INTERVIEWER
     interviewers,
-    candidates,
     activeInterviewer,
+    // CANDIDATE
+    candidates,
     activeCandidate,
+    // SKILLS
     skillsLoaded,
 
+    // INTERVIEWER
     addNewInterviewer,
+    editInterviewer,
+    deleteActiveInterviewer,
     setActiveInterviewer,
     removeActiveInterviewer,
+    getLastInterviewerId,
+    // CANDIDATE
     addNewCandidate,
     setActiveCandidate,
-    loadSkills,
+    getLastCandidateId,
     addCandidateSkills,
     getCandidateSkills,
-    getLastInterviewerId,
-    getLastCandidateId,
+    // SKILLS
+    loadSkills,
+    // INTERVIEW
     addInterview,
     getSelectedCandidateInterview,
     loadCandidateQuestions,

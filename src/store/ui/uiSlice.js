@@ -6,15 +6,20 @@ export const uiSlice = createSlice({
     continueButton: {
       enable: false,
       visible: true,
-      text: 'Continuar'
+      text: "Continuar",
     },
     backButton: {
       enable: false,
       visible: false,
     },
     nextRoute: "",
+    navbarTitle: "",
     showAddCandidateModal: false,
-    showAddInterviewerModal: false,
+    showAddInterviewerModal: {
+      open: false,
+      edit: false,
+    },
+    showDeleteConfirmationModal: false,
     showAddSkillsModal: false,
     showQuestionsInfoModal: false,
   },
@@ -38,7 +43,8 @@ export const uiSlice = createSlice({
       state.showAddCandidateModal = payload;
     },
     onShowAddInterviewerModal: (state, { payload }) => {
-      state.showAddInterviewerModal = payload;
+      state.showAddInterviewerModal.open = payload.open;
+      state.showAddInterviewerModal.edit = payload.edit;
     },
     onShowAddSkillsModal: (state, { payload }) => {
       state.showAddSkillsModal = payload;
@@ -46,8 +52,14 @@ export const uiSlice = createSlice({
     onShowQuestionsInformationModal: (state, { payload }) => {
       state.showQuestionsInfoModal = payload;
     },
+    onShowAddDeleteModal: (state, { payload }) => {
+      state.showDeleteConfirmationModal = payload;
+    },
     onUpdateNextRoute: (state, { payload }) => {
       state.nextRoute = payload;
+    },
+    onUpdateNavbarTitle: (state, { payload }) => {
+      state.navbarTitle = payload;
     },
   },
 });
@@ -62,5 +74,7 @@ export const {
   onShowAddInterviewerModal,
   onShowAddSkillsModal,
   onShowQuestionsInformationModal,
+  onShowAddDeleteModal,
   onUpdateNextRoute,
+  onUpdateNavbarTitle,
 } = uiSlice.actions;

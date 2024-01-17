@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useUiStore } from "../../../store";
 import { useContentStore } from "../../../store/hooks/useContentStore";
 import {
@@ -9,7 +10,11 @@ import {
 
 export const ResultsPage = () => {
   const { activeCandidate } = useContentStore();
-  const { openQuestionsInformationModal } = useUiStore();
+  const { openQuestionsInformationModal, updateNavbarTitle } = useUiStore();
+
+  useEffect(() => {
+    updateNavbarTitle("Results");
+  }, []);
 
   const openQuestionsModal = () => {
     openQuestionsInformationModal();

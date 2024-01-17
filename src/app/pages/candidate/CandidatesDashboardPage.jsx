@@ -11,12 +11,17 @@ import "../../styles/dashboard/dashboardPage.css";
 
 export const CandidatesDashboardPage = () => {
   const { candidates } = useContentStore();
-  const { openCandiateModal, hideContinueButton, showBackButton } =
-    useUiStore();
+  const {
+    openCandiateModal,
+    hideContinueButton,
+    showBackButton,
+    updateNavbarTitle,
+  } = useUiStore();
 
   useEffect(() => {
     showBackButton();
     hideContinueButton();
+    updateNavbarTitle("Dashboard");
   }, []);
 
   const addNewCandidate = () => {
