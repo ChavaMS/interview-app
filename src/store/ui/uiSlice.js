@@ -65,16 +65,19 @@ export const uiSlice = createSlice({
 });
 
 export const {
-  onEnableContinueButton,
-  onSetVisibilityContinueButton,
-  onSetTextContinueButton,
-  onEnableBackButton,
-  onSetVisibilityBackButton,
+  // MODALS
   onShowAddCandidateModal,
   onShowAddInterviewerModal,
   onShowAddSkillsModal,
   onShowQuestionsInformationModal,
   onShowAddDeleteModal,
+  // BUTTONS
+  onEnableContinueButton,
+  onSetVisibilityContinueButton,
+  onSetTextContinueButton,
+  onEnableBackButton,
+  onSetVisibilityBackButton,
+  // ROUTES
   onUpdateNextRoute,
   onUpdateNavbarTitle,
 } = uiSlice.actions;

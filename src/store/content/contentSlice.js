@@ -100,14 +100,18 @@ export const contentSlice = createSlice({
 });
 
 export const {
+  // INTERVIEWER
   onSetActiveInterviewer,
+  onAddNewInterviewer,
+  onDeleteActiveInterviewer,
+  onEditInterviewer,
+  // CANDIDATE
   onSetActiveCandidate,
   onAddNewCandidate,
-  onAddNewInterviewer,
-  onEditInterviewer,
-  onDeleteActiveInterviewer,
+  // SKILLS
   onLoadSkills,
   onAddCandidateSkills,
+  // INTERVIEW
   onAddNewInterview,
   onLoadCandidateQuestions,
   onUpdateInterviewComments,

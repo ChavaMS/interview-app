@@ -112,16 +112,20 @@ export const useUiStore = () => {
   };
 
   return {
+    // MODALS
     showAddCandidateModal,
     showAddInterviewerModal,
     showAddSkillsModal,
     showQuestionsInfoModal,
     showDeleteConfirmationModal,
+    // BUTTON
     backButton,
     continueButton,
+    // ROUTE
     nextRoute,
     navbarTitle,
 
+    // MODALS
     openInterviewersModal,
     openEditInterviewersModal,
     closeInterviewersModal,
@@ -129,6 +133,11 @@ export const useUiStore = () => {
     closeCandidateModal,
     openSkillsModal,
     closeSkillsModal,
+    openQuestionsInformationModal,
+    closeQuestionsInformationModal,
+    openDeleteConfirmationModal,
+    closeDeleteConfirmationModal,
+    // BUTTONS
     showBackButton,
     hideBackButton,
     enableContinueButton,
@@ -136,10 +145,7 @@ export const useUiStore = () => {
     showContinueButton,
     hideContinueButton,
     updateContinueButtonText,
-    openQuestionsInformationModal,
-    closeQuestionsInformationModal,
-    openDeleteConfirmationModal,
-    closeDeleteConfirmationModal,
+    // ROUTE
     updateNextRoute,
     updateNavbarTitle,
   };
