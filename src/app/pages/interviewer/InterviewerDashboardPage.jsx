@@ -8,7 +8,7 @@ import {
 import { UserType } from "../../enums";
 import "../../styles/dashboard/dashboardPage.css";
 
-export const InterviewersDashboardPage = () => {
+export const InterviewerDashboardPage = () => {
   const { interviewers } = useContentStore();
   const {
     updateContinueButtonText,
