@@ -1,9 +1,8 @@
 import Modal from "react-modal";
-import "../../styles/modals/modal.css";
-import { useUiStore } from "../../../store";
+import { useEffect, useState } from "react";
+import { useUiStore, useContentStore } from "../../../store";
 import { useForm } from "../../../hooks";
-import { useContentStore } from "../../../store/hooks/useContentStore";
-import { useEffect } from "react";
+import "../../styles/modals/modal.css";
 
 const customStyles = {
   content: {
@@ -26,19 +25,29 @@ const initialState = {
   type: 0,
 };
 
+const formValidations = {
+  name: [(value) => value.length > 0, "El nombre es requerido"],
+  email: [(value) => value.includes("@"), "El email debe tener un @"],
+  type: [(value) => value == 1 || value == 2, "Debe seleccionar un tipo"],
+};
+
 export const AddCandidateModal = () => {
   const { showAddCandidateModal, closeCandidateModal } = useUiStore();
-  const { activeCandidate, addNewCandidate, editCandidate } =
-    useContentStore();
+  const { activeCandidate, addNewCandidate, editCandidate } = useContentStore();
   const {
     name,
     email,
     type,
     formState,
+    nameValid,
+    emailValid,
+    typeValid,
+    isFormValid,
     onInputChange,
     onResetForm,
     onEditFormState,
-  } = useForm(initialState);
+  } = useForm(initialState, formValidations);
+  const [formSubmitted, setFormSubmitted] = useState();
 
   useEffect(() => {
     if (showAddCandidateModal.edit) {
@@ -56,11 +65,15 @@ export const AddCandidateModal = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
+    setFormSubmitted(true);
+    if (!isFormValid) return;
+
     if (showAddCandidateModal.edit) {
       editCandidate({ ...formState });
     } else {
       addNewCandidate(formState);
     }
+
     onResetForm();
     onCloseModal();
   };
@@ -87,9 +100,10 @@ export const AddCandidateModal = () => {
             name="name"
             onChange={onInputChange}
             type="text"
-            className="form-control"
+            className={"form-control " + (!!nameValid && formSubmitted ? 'input-error' : '')}
             placeholder="Ingrese el nombre"
           />
+          {!!nameValid && formSubmitted ? <small className="error-message">{nameValid}</small> : ""}
         </div>
 
         <div className="form-group mb-2">
@@ -99,9 +113,10 @@ export const AddCandidateModal = () => {
             name="email"
             onChange={onInputChange}
             type="email"
-            className="form-control"
+            className={"form-control " + (!!emailValid && formSubmitted ? 'input-error' : '')}
             placeholder="Correo"
           />
+          {!!emailValid && formSubmitted ? <small className="error-message">{emailValid}</small> : ""}
         </div>
 
         <div className="form-group mb-2">
@@ -110,12 +125,13 @@ export const AddCandidateModal = () => {
             value={type}
             name="type"
             onChange={onInputChange}
-            className="form-select"
+            className={"form-select " + (!!typeValid && formSubmitted ? 'input-error' : '')}
           >
             <option value="0">Seleccione el tipo</option>
             <option value="1">Interno</option>
             <option value="2">Externo</option>
           </select>
+          {!!typeValid && formSubmitted ? <small className="error-message">{typeValid}</small> : ""}
         </div>
 
         <div className="w-100 d-flex justify-content-end">

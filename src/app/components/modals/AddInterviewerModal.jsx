@@ -1,9 +1,8 @@
 import Modal from "react-modal";
-import "../../styles/modals/modal.css";
-import { useUiStore } from "../../../store";
+import { useEffect, useState } from "react";
+import { useUiStore,useContentStore } from "../../../store";
 import { useForm } from "../../../hooks";
-import { useContentStore } from "../../../store/hooks/useContentStore";
-import { useEffect } from "react";
+import "../../styles/modals/modal.css";
 
 const customStyles = {
   content: {
@@ -25,6 +24,11 @@ const initialState = {
 };
 let id = 0;
 
+const formValidations = {
+  name: [(value) => value.length > 0, "El nombre es requerido"],
+  eid: [(value) => value.length > 0, "El EID es requerido"],
+};
+
 export const AddInterviewerModal = () => {
   const { showAddInterviewerModal, closeInterviewersModal } = useUiStore();
   const {
@@ -34,8 +38,18 @@ export const AddInterviewerModal = () => {
     editInterviewer,
   } = useContentStore();
 
-  const { name, eid, onInputChange, formState, onResetForm, onEditFormState } =
-    useForm(initialState);
+  const {
+    name,
+    eid,
+    formState,
+    nameValid,
+    eidValid,
+    isFormValid,
+    onInputChange,
+    onResetForm,
+    onEditFormState,
+  } = useForm(initialState, formValidations);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   useEffect(() => {
     if (showAddInterviewerModal.edit) {
@@ -56,6 +70,9 @@ export const AddInterviewerModal = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
+    setFormSubmitted(true);
+    if (!isFormValid) return;
+
     if (showAddInterviewerModal.edit) {
       editInterviewer({ ...formState });
     } else {
@@ -87,9 +104,10 @@ export const AddInterviewerModal = () => {
             name="name"
             onChange={onInputChange}
             type="text"
-            className="form-control"
+            className={"form-control " + (!!nameValid && formSubmitted ? 'input-error' : '')}
             placeholder="Ingrese el nombre"
           />
+          {!!nameValid && formSubmitted ? <small className="error-message">{nameValid}</small> : ""}
         </div>
 
         <div className="form-group mb-2">
@@ -112,9 +130,10 @@ export const AddInterviewerModal = () => {
             name="eid"
             onChange={onInputChange}
             type="text"
-            className="form-control"
+            className={"form-control " + (!!eidValid && formSubmitted ? 'input-error' : '')}
             placeholder="EID del empleado"
           />
+          {!!eidValid && formSubmitted ? <small className="error-message">{eidValid}</small> : ""}
         </div>
 
         <div className="w-100 d-flex justify-content-end">
