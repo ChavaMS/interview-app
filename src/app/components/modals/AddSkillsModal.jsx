@@ -86,7 +86,7 @@ export const AddSkillsModal = () => {
       closeTimeoutMS={200}
     >
       <div>
-        <i className="fas fa-puzzle-piece skills-icon"></i>
+        <i className="fas fa-puzzle-piece modal-icon"></i>
         <h1 className="d-inline ms-3">Skills a evaluar </h1>
       </div>
       <hr />

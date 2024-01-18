@@ -1,6 +1,5 @@
 import Modal from "react-modal";
-import { useUiStore } from "../../../store";
-import { useContentStore } from "../../../store/hooks/useContentStore";
+import { useUiStore,useContentStore } from "../../../store";
 import { getSkillName } from "../../helpers";
 
 const customStyles = {
@@ -35,7 +34,7 @@ export const QuestionsInformationModal = () => {
       closeTimeoutMS={200}
     >
       <div>
-        <i className="fa-solid fa-question skills-icon"></i>
+        <i className="fa-solid fa-question modal-icon"></i>
         <h1 className="d-inline ms-3">Preguntas</h1>
       </div>
       <hr />

@@ -99,7 +99,7 @@ export const AddInterviewerModal = () => {
     >
       <div>
         <i className="fa-solid fa-user-plus modal-icon"></i>
-        <h1 className="d-inline"> Nuevo entrevistador </h1>
+        <h1 className="d-inline ms-3"> Nuevo entrevistador </h1>
       </div>
       <hr />
       <form className="container" onSubmit={onSubmit}>

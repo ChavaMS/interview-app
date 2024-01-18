@@ -20,7 +20,7 @@ export const CandidateSkills = ({ skills = [] }) => {
         </ul>
         <div className="add-skill-button">
           <button onClick={addSkill} className="btn btn-primary">
-            Add more skills
+            Agregar o editar las skills
           </button>
         </div>
       </div>

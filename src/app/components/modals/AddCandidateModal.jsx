@@ -92,7 +92,7 @@ export const AddCandidateModal = () => {
     >
       <div className="modal-title-content">
         <i className="fa-solid fa-user-plus modal-icon"></i>
-        <h1 className="d-inline">Datos del candidato </h1>
+        <h1 className="d-inline ms-3">Datos del candidato </h1>
       </div>
       <hr />
       <form className="container" onSubmit={onSubmit}>
