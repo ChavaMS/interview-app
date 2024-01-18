@@ -10,6 +10,8 @@ import {
   onUpdateInterviewComments,
   onEditInterviewer,
   onDeleteActiveInterviewer,
+  onDeleteActiveCandidate,
+  onEditCandidate,
 } from "../content/contentSlice";
 import { skills, questions } from "../../app/data";
 
@@ -32,6 +34,7 @@ export const useContentStore = () => {
 
   const editInterviewer = (interviewer) => {
     dispatch(onEditInterviewer(interviewer));
+    setActiveInterviewer(interviewer.id);
   };
 
   const setActiveInterviewer = (id) => {
@@ -65,6 +68,15 @@ export const useContentStore = () => {
     return candidates.length > 0 ? candidates[candidates.length - 1].id + 1 : 0;
   };
 
+  const deleteCandidate = () => {
+    dispatch(onDeleteActiveCandidate());
+  };
+
+  const editCandidate = (candidate) => {
+    dispatch(onEditCandidate(candidate));
+    setActiveCandidate(candidate.id);
+  };
+
   // SKILLS
   const loadSkills = () => {
     const skillsMapped = skills.map((skill) => ({
@@ -89,7 +101,7 @@ export const useContentStore = () => {
   // INTERVIEW
   const addInterview = (interview) => {
     const hasInterviews = interviews.some(
-      (interview) => interview.candidate.id === activeCandidate.id
+      (interview) => interview.candidate === activeCandidate.id
     );
     if (!hasInterviews) {
       dispatch(onAddNewInterview(interview));
@@ -160,6 +172,8 @@ export const useContentStore = () => {
     activeCandidate,
     // SKILLS
     skillsLoaded,
+    // INTERVIEW
+    interviews,
 
     // INTERVIEWER
     addNewInterviewer,
@@ -170,6 +184,8 @@ export const useContentStore = () => {
     getLastInterviewerId,
     // CANDIDATE
     addNewCandidate,
+    deleteCandidate,
+    editCandidate,
     setActiveCandidate,
     getLastCandidateId,
     addCandidateSkills,

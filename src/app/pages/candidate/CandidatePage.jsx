@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useContentStore } from "../../../store/hooks/useContentStore";
+import { useUiStore, useContentStore } from "../../../store";
 import {
   CandidateSkills,
   CandidateInformation,
@@ -7,16 +7,15 @@ import {
   AddSkillsModal,
 } from "../../components";
 import "../../styles/candidate/candidatePage.css";
-import { useUiStore } from "../../../store";
 
 export const CandidatePage = () => {
-  const { activeCandidate, candidatesSkills, loadSkills, getCandidateSkills } =
+  const { activeCandidate, loadSkills, getCandidateSkills } =
     useContentStore();
   const {
     showContinueButton,
     updateContinueButtonText,
-    enableContinueButton,
     disableContinueButton,
+    enableContinueButton,
     updateNextRoute,
     updateNavbarTitle,
   } = useUiStore();
@@ -33,7 +32,7 @@ export const CandidatePage = () => {
     updateContinueButtonText("Comenzar");
     updateNextRoute("/interview");
     loadSkills();
-  }, [candidatesSkills]);
+  }, []);
 
   return (
     <div className="container-fluid">

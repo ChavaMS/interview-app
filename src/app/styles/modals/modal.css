@@ -44,7 +44,16 @@
   color: #9c33c1;
 }
 
-.modal-title-content{
+.modal-title-content {
   padding-left: 12px;
   padding-right: 12px;
+}
+
+.checkbox-container {
+  column-count: 2;
+  column-gap: 20px;
+}
+
+.checkbox-item {
+  font-size: 20px;
 }

@@ -14,7 +14,10 @@ export const uiSlice = createSlice({
     },
     nextRoute: "",
     navbarTitle: "",
-    showAddCandidateModal: false,
+    showAddCandidateModal: {
+      open: false,
+      edit: false,
+    },
     showAddInterviewerModal: {
       open: false,
       edit: false,
@@ -40,7 +43,8 @@ export const uiSlice = createSlice({
       state.backButton.visible = payload;
     },
     onShowAddCandidateModal: (state, { payload }) => {
-      state.showAddCandidateModal = payload;
+      state.showAddCandidateModal.open = payload.open;
+      state.showAddCandidateModal.edit = payload.edit;
     },
     onShowAddInterviewerModal: (state, { payload }) => {
       state.showAddInterviewerModal.open = payload.open;

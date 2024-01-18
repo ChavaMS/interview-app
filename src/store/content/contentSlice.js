@@ -35,6 +35,23 @@ export const contentSlice = createSlice({
         state.activeCandidate = null;
       }
     },
+    onDeleteActiveCandidate: (state) => {
+      state.candidates = state.candidates.filter((candidate) => {
+        candidate.id !== state.activeCandidate.id;
+      });
+      state.activeCandidate = null;
+    },
+    onEditCandidate: (state, { payload }) => {
+      state.candidates = state.candidates.map((candidate) => {
+        if (candidate.id === state.activeCandidate.id) {
+          return {
+            ...payload,
+          };
+        } else {
+          return { ...candidate };
+        }
+      });
+    },
     onAddNewInterviewer: (state, { payload }) => {
       state.interviewers.push(payload);
       state.activeInterviewer = null;
@@ -108,6 +125,8 @@ export const {
   // CANDIDATE
   onSetActiveCandidate,
   onAddNewCandidate,
+  onDeleteActiveCandidate,
+  onEditCandidate,
   // SKILLS
   onLoadSkills,
   onAddCandidateSkills,

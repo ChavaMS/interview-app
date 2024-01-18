@@ -8,6 +8,7 @@ export * from "./candidate/CandidatesTable";
 export * from "./candidate/CandidateEmptySkills";
 export * from "./candidate/CandidateSkills";
 export * from "./candidate/CandidateInformation";
+export * from './candidate/CandidateActions';
 
 // INTERVIEW
 export * from './interview/InterviewResults';

@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useContentStore } from "../../../store/hooks/useContentStore";
 import { getSkillName } from "../../helpers";
+import { useUiStore, useContentStore } from "../../../store";
 import "../../styles/interview/questionPage.css";
-import { useUiStore } from "../../../store";
 
 export const InterviewPage = () => {
   const { skillsLoaded, addInterview, loadCandidateQuestions } =
@@ -108,7 +107,7 @@ export const InterviewPage = () => {
           {index + 1}/{form.length}
         </span>
       </div>
-      <div className="d-flex justify-content-end mt-5">
+      <div className="d-flex justify-content-center mt-5">
         <button className="btn btn-danger" onClick={submitForm}>
           Finalizar
         </button>

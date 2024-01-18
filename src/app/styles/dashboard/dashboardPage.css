@@ -7,3 +7,8 @@
   font-size: 80px;
   color: #9c33c1;
 }
+
+.candidates-dashboard-button{
+  display: flex;
+  align-items: center;
+}

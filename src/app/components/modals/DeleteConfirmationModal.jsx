@@ -23,6 +23,7 @@ export const DeleteConfirmationModal = ({ deleteFunction }) => {
   };
 
   const onSubmit = (event) => {
+    console.log('flag');
     event.preventDefault();
     deleteFunction();
     onCloseModal();
@@ -45,7 +46,7 @@ export const DeleteConfirmationModal = ({ deleteFunction }) => {
       <hr />
       <form className="container" onSubmit={onSubmit}>
         <div className="d-flex justify-content-between mt-4">
-          <button className="btn btn-secondary" onClick={onCloseModal}>
+          <button type="button" className="btn btn-secondary" onClick={onCloseModal}>
             Cancelar
           </button>
           <button className="btn btn-danger" type="submit">

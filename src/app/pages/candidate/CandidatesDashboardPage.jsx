@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import { useUiStore } from "../../../store";
-import { useContentStore } from "../../../store/hooks/useContentStore";
+import { useUiStore, useContentStore} from "../../../store";
 import {
   AddCandidateModal,
   CandidatesTable,
@@ -31,11 +30,12 @@ export const CandidatesDashboardPage = () => {
   return (
     <>
       <div className="container-fluid dashboard-container">
-        <div className="mt-3">
+        <div className="mt-3 candidates-dashboard-button">
           <h1 className="d-inline me-3">Candidatos</h1>
           <button
             className={
-              "btn btn-primary " + (candidates.length > 0 ? "" : "d-none")
+              "btn btn-primary h-100 " +
+              (candidates.length > 0 ? "" : "d-none")
             }
             onClick={addNewCandidate}
           >

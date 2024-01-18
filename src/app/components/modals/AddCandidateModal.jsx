@@ -3,6 +3,7 @@ import "../../styles/modals/modal.css";
 import { useUiStore } from "../../../store";
 import { useForm } from "../../../hooks";
 import { useContentStore } from "../../../store/hooks/useContentStore";
+import { useEffect } from "react";
 
 const customStyles = {
   content: {
@@ -27,8 +28,27 @@ const initialState = {
 
 export const AddCandidateModal = () => {
   const { showAddCandidateModal, closeCandidateModal } = useUiStore();
-  const { addNewCandidate } = useContentStore();
-  const { name, email, type, formState, onInputChange, onResetForm } = useForm(initialState);
+  const { activeCandidate, addNewCandidate, editCandidate } =
+    useContentStore();
+  const {
+    name,
+    email,
+    type,
+    formState,
+    onInputChange,
+    onResetForm,
+    onEditFormState,
+  } = useForm(initialState);
+
+  useEffect(() => {
+    if (showAddCandidateModal.edit) {
+      onEditFormState({
+        ...activeCandidate,
+      });
+    } else {
+      onResetForm();
+    }
+  }, [showAddCandidateModal]);
 
   const onCloseModal = () => {
     closeCandidateModal();
@@ -36,14 +56,18 @@ export const AddCandidateModal = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    addNewCandidate(formState);
+    if (showAddCandidateModal.edit) {
+      editCandidate({ ...formState });
+    } else {
+      addNewCandidate(formState);
+    }
     onResetForm();
     onCloseModal();
   };
 
   return (
     <Modal
-      isOpen={showAddCandidateModal}
+      isOpen={showAddCandidateModal.open}
       onRequestClose={onCloseModal}
       style={customStyles}
       className="modal"

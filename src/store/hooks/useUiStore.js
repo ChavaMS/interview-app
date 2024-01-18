@@ -41,11 +41,15 @@ export const useUiStore = () => {
   };
 
   const openCandiateModal = () => {
-    dispatch(onShowAddCandidateModal(true));
+    dispatch(onShowAddCandidateModal({ open: true, edit: false }));
   };
 
+  const openEditCandidateModal = () => {
+    dispatch(onShowAddCandidateModal({ open: true, edit: true }));
+  }
+
   const closeCandidateModal = () => {
-    dispatch(onShowAddCandidateModal(false));
+    dispatch(onShowAddCandidateModal({ open: false, edit: false }));
   };
 
   const openDeleteConfirmationModal = () => {
@@ -130,6 +134,7 @@ export const useUiStore = () => {
     openEditInterviewersModal,
     closeInterviewersModal,
     openCandiateModal,
+    openEditCandidateModal,
     closeCandidateModal,
     openSkillsModal,
     closeSkillsModal,

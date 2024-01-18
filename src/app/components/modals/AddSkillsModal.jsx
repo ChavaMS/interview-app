@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { useUiStore,useContentStore } from "../../../store";
 import Modal from "react-modal";
+import { useUiStore, useContentStore } from "../../../store";
+import { checkSkillsSelected } from "../../helpers";
 import "../../styles/modals/modal.css";
 
 const customStyles = {
@@ -17,7 +18,12 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 export const AddSkillsModal = () => {
-  const { showAddSkillsModal, closeSkillsModal } = useUiStore();
+  const {
+    showAddSkillsModal,
+    closeSkillsModal,
+    enableContinueButton,
+    disableContinueButton,
+  } = useUiStore();
   const {
     skillsLoaded: skills = [],
     activeCandidate,
@@ -53,6 +59,13 @@ export const AddSkillsModal = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
+
+    if (checkSkillsSelected(skillsState)) {
+      enableContinueButton();
+    } else {
+      disableContinueButton();
+    }
+
     let candidateSkills = {
       candidateId: activeCandidate.id,
       skills: skillsState.filter((skill) => skill.isChecked),
@@ -77,20 +90,22 @@ export const AddSkillsModal = () => {
       <hr />
       <form className="container" onSubmit={onSubmit}>
         <div className="row">
-          {skills.map((skill, index) => (
-            <div className="form-check" key={index}>
-              <input
-                className="form-check-input"
-                type="checkbox"
-                name={skill.name}
-                value={skill.name}
-                checked={skillsState[index]?.isChecked}
-                onChange={() => handleOnChange(index)}
-                id="flexCheckDefault"
-              />
-              <label className="form-check-label">{skill.name}</label>
-            </div>
-          ))}
+          <div className="checkbox-container">
+            {skills.map((skill, index) => (
+              <div className="form-check checkbox-item" key={index}>
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  name={skill.name}
+                  value={skill.name}
+                  checked={skillsState[index]?.isChecked}
+                  onChange={() => handleOnChange(index)}
+                  id="flexCheckDefault"
+                />
+                <label className="form-check-label">{skill.name}</label>
+              </div>
+            ))}
+          </div>
         </div>
         <div className="d-flex justify-content-between mt-4">
           <button className="btn btn-secondary" onClick={onCloseModal}>

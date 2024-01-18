@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import { useUiStore } from "../../../store";
-import { useContentStore } from "../../../store/hooks/useContentStore";
+import { useUiStore, useContentStore } from "../../../store";
 import {
   CandidateInformation,
   QuestionsInformationModal,

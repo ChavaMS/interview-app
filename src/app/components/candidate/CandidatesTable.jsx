@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { useContentStore } from "../../../store/hooks/useContentStore";
 import { getCandidateType } from "../../helpers";
-import { useUiStore } from "../../../store";
+import { useUiStore, useContentStore } from "../../../store";
+import { CandidateActions } from "./CandidateActions";
 import "../../styles/candidate/candidateTable.css";
 
 export const CandidatesTable = () => {
@@ -35,61 +35,76 @@ export const CandidatesTable = () => {
     <table className="table mt-4">
       <thead>
         <tr>
+          <th></th>
           <th scope="col">ID</th>
           <th scope="col">Nombre</th>
           <th scope="col">Email</th>
           <th scope="col">Tipo de candidato</th>
           <th scope="col">Información del candidato</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         {candidates.map((candidate) => (
-          <tr
-            className="table-row-pointer"
-            key={candidate.id}
-          >
-            <th>
-              <input type="checkbox" checked={candidate.id === activeCandidate?.id} onChange={() => selectCandidate(candidate.id)} />
+          <tr key={candidate.id}>
+            <th className="table-data-align">
+              <input
+                type="checkbox"
+                checked={candidate.id === activeCandidate?.id}
+                onChange={() => selectCandidate(candidate.id)}
+              />
             </th>
             <th
               className={
-                activeCandidate?.id === candidate.id ? "row-selected" : ""
+                "table-data-align " +
+                (activeCandidate?.id === candidate.id ? "row-selected" : "")
               }
             >
-              {candidate.id}
+              <span>{candidate.id}</span>
             </th>
             <td
               className={
-                activeCandidate?.id === candidate.id ? "row-selected" : ""
+                "table-data-align " +
+                (activeCandidate?.id === candidate.id ? "row-selected" : "")
               }
             >
-              {candidate.name}
+              <span>{candidate.name}</span>
             </td>
             <td
               className={
-                activeCandidate?.id === candidate.id ? "row-selected" : ""
+                "table-data-align " +
+                (activeCandidate?.id === candidate.id ? "row-selected" : "")
               }
             >
-              {candidate.email}
+              <span>{candidate.email}</span>
             </td>
             <td
               className={
-                activeCandidate?.id === candidate.id ? "row-selected" : ""
+                "table-data-align " +
+                (activeCandidate?.id === candidate.id ? "row-selected" : "")
               }
             >
-              {getCandidateType(candidate.type)}
+              <span>{getCandidateType(candidate.type)}</span>
             </td>
             <td
               className={
-                activeCandidate?.id === candidate.id ? "row-selected" : ""
+                "table-data-align " +
+                (activeCandidate?.id === candidate.id ? "row-selected" : "")
               }
             >
               <button
-                className="btn btn-primary"
+                className="btn btn-primary me-1"
                 onClick={() => openCandidateInfo(candidate.id)}
               >
-                Ver mas Información
+                <span>Ver mas Información</span>
               </button>
+              {activeCandidate?.id === candidate.id ? (
+                <div className="d-inline">
+                  <CandidateActions />
+                </div>
+              ) : (
+                <></>
+              )}
             </td>
           </tr>
         ))}

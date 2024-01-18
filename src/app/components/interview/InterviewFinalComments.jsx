@@ -1,11 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useContentStore } from "../../../store/hooks/useContentStore";
 
 export const InterviewFinalComments = () => {
-  const { updateInterviewComments } = useContentStore();
   const navigate = useNavigate();
   const [comment, setComment] = useState("");
+  const {
+    updateInterviewComments,
+    getSelectedCandidateInterview,
+    interviews,
+    activeCandidate,
+  } = useContentStore();
+
+  useEffect(() => {
+    if (getSelectedCandidateInterview().length > 0) {
+      let comments = interviews.find(
+        (interview) => interview.candidate === activeCandidate.id
+      ).comments;
+
+      setComment(comments);
+    }
+  }, []);
 
   const onCommentChanged = ({ target }) => {
     setComment(target.value);
@@ -15,9 +30,9 @@ export const InterviewFinalComments = () => {
     updateInterviewComments(comment);
     navigate("/candidates");
   };
-  
+
   return (
-    <div className="row">
+    <div className="row mt-5">
       <div className="col-md-6">
         <h3>Comentarios:</h3>
         <textarea
