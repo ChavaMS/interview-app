@@ -1,5 +1,4 @@
 // INTERVIEWER
-export * from "./interviewer/InterviewersDashboardPage";
 
 // CANDIDATE
 export * from "./candidate/CandidatesDashboardPage";
