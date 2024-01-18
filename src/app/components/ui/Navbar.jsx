@@ -6,9 +6,9 @@ export const Navbar = () => {
   return (
     <nav className="navbar navbar-color">
       <div className="container-fluid">
-        <a className="navbar-brand navbar-section-name" href="#">
+        <span className="navbar-brand navbar-section-name">
           {navbarTitle}
-        </a>
+        </span>
       </div>
     </nav>
   );

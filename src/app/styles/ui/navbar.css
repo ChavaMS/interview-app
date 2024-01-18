@@ -5,3 +5,7 @@
 .navbar-section-name {
   color: white;
 }
+
+.navbar-section-name:hover {
+  color: white;
+}

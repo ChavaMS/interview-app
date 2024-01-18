@@ -1,6 +1,6 @@
 import Modal from "react-modal";
 import { useEffect, useState } from "react";
-import { useUiStore,useContentStore } from "../../../store";
+import { useUiStore, useContentStore } from "../../../store";
 import { useForm } from "../../../hooks";
 import "../../styles/modals/modal.css";
 
@@ -49,9 +49,11 @@ export const AddInterviewerModal = () => {
     onResetForm,
     onEditFormState,
   } = useForm(initialState, formValidations);
+
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   useEffect(() => {
+    // If the modal was opened to edit an interviewer we load the activeInterviewers data
     if (showAddInterviewerModal.edit) {
       onEditFormState({
         ...activeInterviewer,
@@ -78,8 +80,11 @@ export const AddInterviewerModal = () => {
     } else {
       addNewInterviewer({ ...formState, id: getLastInterviewerId() });
     }
-    onResetForm();
+
     onCloseModal();
+    // Resets the form and void errors to appear before closing the modal
+    setFormSubmitted(false);
+    onResetForm();
   };
 
   return (
@@ -104,10 +109,17 @@ export const AddInterviewerModal = () => {
             name="name"
             onChange={onInputChange}
             type="text"
-            className={"form-control " + (!!nameValid && formSubmitted ? 'input-error' : '')}
+            className={
+              "form-control " +
+              (!!nameValid && formSubmitted ? "input-error" : "")
+            }
             placeholder="Ingrese el nombre"
           />
-          {!!nameValid && formSubmitted ? <small className="error-message">{nameValid}</small> : ""}
+          {!!nameValid && formSubmitted ? (
+            <small className="error-message">{nameValid}</small>
+          ) : (
+            ""
+          )}
         </div>
 
         <div className="form-group mb-2">
@@ -130,10 +142,17 @@ export const AddInterviewerModal = () => {
             name="eid"
             onChange={onInputChange}
             type="text"
-            className={"form-control " + (!!eidValid && formSubmitted ? 'input-error' : '')}
+            className={
+              "form-control " +
+              (!!eidValid && formSubmitted ? "input-error" : "")
+            }
             placeholder="EID del empleado"
           />
-          {!!eidValid && formSubmitted ? <small className="error-message">{eidValid}</small> : ""}
+          {!!eidValid && formSubmitted ? (
+            <small className="error-message">{eidValid}</small>
+          ) : (
+            ""
+          )}
         </div>
 
         <div className="w-100 d-flex justify-content-end">

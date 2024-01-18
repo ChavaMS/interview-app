@@ -1,5 +1,5 @@
-import { InterviewerDashboardPage } from "../pages";
+import { InterviewersDashboardPage } from "../pages";
 
 export const InterviewerRoutes = [
-  { path: "", element: <InterviewerDashboardPage /> },
+  { path: "", element: <InterviewersDashboardPage /> },
 ];
