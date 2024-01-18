@@ -9,7 +9,7 @@ Currently, two official plugins are available:
 
 # React
 
-Link: [Interview-App](https://main--admirable-twilight-7b0d0e.netlify.app/)
+Link: [Interview-App](https://react-interview-app.netlify.app/)
 
 # State configuration
 
