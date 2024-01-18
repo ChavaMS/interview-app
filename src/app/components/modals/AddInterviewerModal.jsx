@@ -61,6 +61,7 @@ export const AddInterviewerModal = () => {
 
       id = activeInterviewer.id;
     } else {
+      setFormSubmitted(false);
       onResetForm();
       id = getLastInterviewerId();
     }

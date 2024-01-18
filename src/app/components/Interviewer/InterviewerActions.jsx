@@ -6,6 +6,7 @@ export const InterviewerActions = () => {
     useUiStore();
 
   const { deleteActiveInterviewer } = useContentStore();
+  
   const openInterviewerModal = () => {
     openEditInterviewersModal();
   };

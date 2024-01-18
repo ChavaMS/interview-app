@@ -34,6 +34,7 @@ export const AddSkillsModal = () => {
   const [skillsState, setSkillsState] = useState(skills);
 
   useEffect(() => {
+    // Loads the candidate skills, if they were previously selected
     let candidateSkills = getCandidateSkills();
     let skillsForm = skills.map((skill) => ({ ...skill, isChecked: false }));
     skillsForm.forEach((skill, index) => {
@@ -60,6 +61,7 @@ export const AddSkillsModal = () => {
   const onSubmit = (event) => {
     event.preventDefault();
 
+    // Verify that we have selected at least one skill to enable the continue button
     if (checkSkillsSelected(skillsState)) {
       enableContinueButton();
     } else {

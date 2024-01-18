@@ -55,6 +55,7 @@ export const AddCandidateModal = () => {
         ...activeCandidate,
       });
     } else {
+      setFormSubmitted(false);
       onResetForm();
     }
   }, [showAddCandidateModal]);
@@ -74,8 +75,10 @@ export const AddCandidateModal = () => {
       addNewCandidate(formState);
     }
 
-    onResetForm();
     onCloseModal();
+    // Resets the form and void errors to appear before closing the modal
+    setFormSubmitted(false);
+    onResetForm();
   };
 
   return (
@@ -100,10 +103,17 @@ export const AddCandidateModal = () => {
             name="name"
             onChange={onInputChange}
             type="text"
-            className={"form-control " + (!!nameValid && formSubmitted ? 'input-error' : '')}
+            className={
+              "form-control " +
+              (!!nameValid && formSubmitted ? "input-error" : "")
+            }
             placeholder="Ingrese el nombre"
           />
-          {!!nameValid && formSubmitted ? <small className="error-message">{nameValid}</small> : ""}
+          {!!nameValid && formSubmitted ? (
+            <small className="error-message">{nameValid}</small>
+          ) : (
+            ""
+          )}
         </div>
 
         <div className="form-group mb-2">
@@ -113,10 +123,17 @@ export const AddCandidateModal = () => {
             name="email"
             onChange={onInputChange}
             type="email"
-            className={"form-control " + (!!emailValid && formSubmitted ? 'input-error' : '')}
+            className={
+              "form-control " +
+              (!!emailValid && formSubmitted ? "input-error" : "")
+            }
             placeholder="Correo"
           />
-          {!!emailValid && formSubmitted ? <small className="error-message">{emailValid}</small> : ""}
+          {!!emailValid && formSubmitted ? (
+            <small className="error-message">{emailValid}</small>
+          ) : (
+            ""
+          )}
         </div>
 
         <div className="form-group mb-2">
@@ -125,13 +142,20 @@ export const AddCandidateModal = () => {
             value={type}
             name="type"
             onChange={onInputChange}
-            className={"form-select " + (!!typeValid && formSubmitted ? 'input-error' : '')}
+            className={
+              "form-select " +
+              (!!typeValid && formSubmitted ? "input-error" : "")
+            }
           >
             <option value="0">Seleccione el tipo</option>
             <option value="1">Interno</option>
             <option value="2">Externo</option>
           </select>
-          {!!typeValid && formSubmitted ? <small className="error-message">{typeValid}</small> : ""}
+          {!!typeValid && formSubmitted ? (
+            <small className="error-message">{typeValid}</small>
+          ) : (
+            ""
+          )}
         </div>
 
         <div className="w-100 d-flex justify-content-end">

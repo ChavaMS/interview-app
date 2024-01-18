@@ -23,7 +23,6 @@ export const DeleteConfirmationModal = ({ deleteFunction }) => {
   };
 
   const onSubmit = (event) => {
-    console.log('flag');
     event.preventDefault();
     deleteFunction();
     onCloseModal();

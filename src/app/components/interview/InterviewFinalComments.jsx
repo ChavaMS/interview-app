@@ -3,14 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useContentStore } from "../../../store/hooks/useContentStore";
 
 export const InterviewFinalComments = () => {
-  const navigate = useNavigate();
-  const [comment, setComment] = useState("");
   const {
-    updateInterviewComments,
-    getSelectedCandidateInterview,
     interviews,
     activeCandidate,
+    updateInterviewComments,
+    getSelectedCandidateInterview,
   } = useContentStore();
+
+  const navigate = useNavigate();
+  const [comment, setComment] = useState("");
 
   useEffect(() => {
     if (getSelectedCandidateInterview().length > 0) {
